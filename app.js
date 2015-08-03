@@ -19,10 +19,23 @@ app.get(/hello/, function (req, res) {
   res.send('Hello!');
 });
 
-app.get('/world', function (req, res) {
-  res.render('templates/world',
-    { title: 'Awesomesite.com', welcome: 'Thanks for coming!' }
-  );
+app.get('/awesomethings', function (req, res) {
+  setTimeout(function () {
+    var awesomeThings = [
+      'Pizza',
+      'Bacon',
+      '2nd Ammendment',
+      'Pluto',
+      'Space Jam'
+    ];
+
+    res.render('templates/world',
+      { title: 'Awesomesite.com',
+        welcome: 'Thanks for coming!',
+        awesomeThings: awesomeThings
+      }
+    );
+  }, 5000);
 });
 
 app.get('/test', function (req, res, next) {
