@@ -1,6 +1,8 @@
 var express = require('express');
 var app = express();
 
+app.set('view engine', 'ejs');
+
 app.use(function (req, res, next) {
   // logging at the top
   console.log('Request at ' + new Date().toISOString());
@@ -18,7 +20,9 @@ app.get(/hello/, function (req, res) {
 });
 
 app.get('/world', function (req, res) {
-  res.send('World!');
+  res.render('templates/world',
+    { title: 'Awesomesite.com', welcome: 'Thanks for coming!' }
+  );
 });
 
 app.get('/test', function (req, res, next) {
