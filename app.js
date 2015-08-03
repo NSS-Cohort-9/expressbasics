@@ -8,6 +8,8 @@ var app = express();
 app.set('view engine', 'ejs');
 app.set('case sensitive routing', true);
 
+app.locals.title = 'aweso.me';
+
 app.use(function (req, res, next) {
   // logging at the top
   console.log('Request at ' + new Date().toISOString());

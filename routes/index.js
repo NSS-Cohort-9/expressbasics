@@ -20,7 +20,7 @@ router.get('/awesomethings', function (req, res) {
     ];
 
     res.render('templates/world',
-      { title: 'Awesomesite.com',
+      {
         welcome: 'Thanks for coming!',
         awesomeThings: awesomeThings
       }
