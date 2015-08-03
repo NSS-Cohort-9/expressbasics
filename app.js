@@ -6,6 +6,7 @@ var pizza = require('./routes/pizza');
 var app = express();
 
 app.set('view engine', 'ejs');
+app.set('case sensitive routing', true);
 
 app.use(function (req, res, next) {
   // logging at the top
