@@ -23,6 +23,10 @@ app.get('/test', function (req, res) {
   res.send('Test2!');
 });
 
+app.get('/json', function (req, res) {
+  res.send({an: 'object'});
+});
+
 var server = app.listen(3000, function () {
   var host = server.address().address;
   var port = server.address().port;
