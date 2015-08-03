@@ -1,4 +1,5 @@
 var express = require('express');
+var lessCSS = require('less-middleware');
 
 var routes = require('./routes/index');
 var pizza = require('./routes/pizza');
@@ -9,6 +10,8 @@ app.set('view engine', 'ejs');
 app.set('case sensitive routing', true);
 
 app.locals.title = 'aweso.me';
+
+app.use(lessCSS('public'));
 
 app.use(function (req, res, next) {
   // logging at the top
