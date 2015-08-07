@@ -3,7 +3,7 @@ var fs = require('fs');
 var express = require('express');
 var lessCSS = require('less-middleware');
 var morgan = require('morgan');
-var bodyParser = require('body-parser')
+var bodyParser = require('body-parser');
 
 var routes = require('./routes/index');
 var pizza = require('./routes/pizza');
