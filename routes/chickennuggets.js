@@ -1,6 +1,7 @@
 var express = require('express');
-var router = express.Router();
+var moment = require('moment');
 
+var router = express.Router();
 
 router.get('/', function (req, res) {
   var collection = global.db.collection('chickenNuggets');
@@ -11,7 +12,7 @@ router.get('/', function (req, res) {
         name:      order.name,
         flavor:    order.style,
         qty:       order.qty,
-        createdAt: order._id.getTimestamp()
+        createdAt: moment(order._id.getTimestamp()).fromNow()
       };
     });
 
