@@ -1,7 +1,3 @@
-console.log(process.env);
-console.log('PORT', process.env.PORT);
-console.log('NODE_ENV:', process.env.NODE_ENV);
-
 var fs = require('fs');
 
 var express = require('express');
@@ -16,9 +12,9 @@ var imgur = require('./routes/imgur');
 
 var app = express();
 
-// if (process.env.NODE_ENV !== 'production') {
-//   require('./lib/secrets');
-// }
+if (process.env.NODE_ENV !== 'production') {
+  require('./lib/secrets');
+}
 
 require('./lib/mongodb');
 
@@ -77,9 +73,10 @@ app.use(function (err, req, res, next) {
   res.status(500).send('My Bad');
 });
 
-var server = app.listen(process.env.PORT, function () {
+var port = process.env.PORT || 3000;
+
+var server = app.listen(port, function () {
   var host = server.address().address;
   var port = server.address().port;
-  console.log(process.env);
   console.log('Example app listening at http://%s:%d', host, port);
 });
