@@ -1,3 +1,5 @@
+console.log(process.env);
+
 var fs = require('fs');
 
 var express = require('express');
