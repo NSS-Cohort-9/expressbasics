@@ -24,7 +24,7 @@ app.set('case sensitive routing', true);
 app.locals.title = 'aweso.me';
 
 app.use(bodyParser.urlencoded({extended: true}));
-app.use(lessCSS('public'));
+app.use(lessCSS('www/stylesheets'));
 
 var logStream = fs.createWriteStream('access.log', {flags: 'a'});
 app.use(morgan('combined', {stream: logStream}));
@@ -43,14 +43,11 @@ app.use(function (req, res, next) {
   next();
 });
 
-app.use(express.static('public'));
-
-
-
 app.use('/', routes);
 app.use('/pizza', pizza);
 app.use('/chickennuggets', chickennuggets);
 app.use('/imgur', imgur);
+app.use(express.static('www'));
 
 app.use(function (req, res) {
   res.status(403).send('Unauthorized!');
