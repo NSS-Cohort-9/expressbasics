@@ -1,8 +1,6 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title><%= title %> | Imgur</title>
-</head>
+<%- include('head', {page: 'Imgur'}) %>
 <body>
   <h1>Welcome to Imgur</h1>
 
@@ -10,5 +8,6 @@
     <input type="file" name="image" accept="image/*">
     <input type="submit" value="Upload">
   </form>
+  <%- include('javascripts') %>
 </body>
 </html>

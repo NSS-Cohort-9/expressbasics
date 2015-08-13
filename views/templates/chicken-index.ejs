@@ -1,8 +1,6 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title><%= title %> | Chicken | List Orders</title>
-</head>
+<%- include('head', {page: 'Chicken | List Orders'}) %>
 <body>
   <h1>Orders</h1>
   <a href="/chickennuggets/order">New Order</a>
@@ -32,5 +30,6 @@
       <% }); %>
     </tbody>
   </table>
+  <%- include('javascripts') %>
 </body>
 </html>
