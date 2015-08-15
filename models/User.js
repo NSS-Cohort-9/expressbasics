@@ -1,4 +1,5 @@
 var bcrypt = require('bcrypt');
+var _ = require('lodash');
 
 function User(u) {
   this.email = u.email;
@@ -6,7 +7,9 @@ function User(u) {
 }
 
 User.findByEmail = function (email, cb) {
-  User.collection.findOne({email: email}, cb);
+  User.collection.findOne({email: email}, function (err, user) {
+    cb(err, setPrototype(user));
+  });
 };
 
 User.login = function (u, cb) {
@@ -32,9 +35,13 @@ User.create = function (u, cb) {
 
   bcrypt.hash(u.password, 8, function(err, hash) {
     u.hashedPassword = hash;
-    var user = new User(u)
-    User.collection.save(user, cb);
+    var user = new User(u);
+    user.save(cb);
   });
+};
+
+User.prototype.save = function (cb) {
+  User.collection.save(this, cb);
 };
 
 Object.defineProperty(User, 'collection', {
@@ -44,3 +51,7 @@ Object.defineProperty(User, 'collection', {
 });
 
 module.exports = User;
+
+function setPrototype(pojo) {
+  return _.create(User.prototype, pojo);
+}
