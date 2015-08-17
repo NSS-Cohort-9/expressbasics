@@ -17,6 +17,11 @@ Object.defineProperty(Order, 'collection', {
   }
 });
 
+Order.create = function (o, cb) {
+  var order = new Order(o);
+  order.save(cb);
+}
+
 Order.prototype.save = function (cb) {
   Order.collection.save(this, cb);
 }

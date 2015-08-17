@@ -25,9 +25,7 @@ router.get('/order', function (req, res) {
 });
 
 router.post('/order', function (req, res) {
-  var order = new Order(req.body);
-
-  order.save(function () {
+  Order.create(req.body, function () {
     res.redirect('/chickennuggets');
   });
 });
