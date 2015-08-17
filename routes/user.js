@@ -4,8 +4,16 @@ var router = express.Router();
 var app = require('../app');
 var User = require('../models/User');
 
+router.get('/logout', function (req, res){
+  req.session.regenerate(function () {
+    res.redirect('/user/login');
+  });
+});
+
 router.get('/login', function loginUser(req, res) {
-  res.render('user/login');
+  req.session.regenerate(function () {
+    res.render('user/login');
+  });
 });
 
 router.post('/login', function doLogin(req, res) {
@@ -18,7 +26,9 @@ router.post('/login', function doLogin(req, res) {
 });
 
 router.get('/new', function newUser(req, res) {
-  res.render('user/new');
+  req.session.regenerate(function () {
+    res.render('user/new');
+  });
 });
 
 router.post('/', function createUser(req, res) {
