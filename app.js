@@ -51,12 +51,17 @@ app.use(function (req, res, next) {
   next();
 });
 
+app.use(function getAuthStatus(req, res, next) {
+  res.locals.user = req.session.user || null;
+  next();
+});
+
 app.use('/', routes);
 app.use('/user', user);
 app.use(express.static('www'));
 
 app.use(function requireAuth(req, res, next) {
-  if (req.session.userId) {
+  if (req.session.user) {
     next();
   } else {
     res.redirect('/user/login');
@@ -95,3 +100,5 @@ var server = app.listen(port, function () {
   var port = server.address().port;
   console.log('Example app listening at http://%s:%d', host, port);
 });
+
+module.exports = app;

@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 
+var app = require('../app');
 var User = require('../models/User');
 
 router.get('/login', function loginUser(req, res) {
@@ -10,7 +11,7 @@ router.get('/login', function loginUser(req, res) {
 router.post('/login', function doLogin(req, res) {
   User.login(req.body, function (err, user) {
     req.session.regenerate(function () {
-      req.session.userId = user._id;
+      req.session.user = user;
       res.redirect('/');
     });
   });
