@@ -1,7 +1,6 @@
 var express = require('express');
 var router = express.Router();
 
-var app = require('../app');
 var User = require('../models/User');
 
 router.get('/logout', function (req, res){
