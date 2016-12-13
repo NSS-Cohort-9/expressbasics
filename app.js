@@ -14,10 +14,7 @@ var user = require('./routes/user');
 
 var app = express();
 
-if (process.env.NODE_ENV !== 'production') {
-  require('./lib/secrets');
-}
-
+require('./lib/secrets');
 require('./lib/mongodb');
 
 app.set('view engine', 'ejs');
@@ -38,18 +35,18 @@ var logStream = fs.createWriteStream('access.log', {flags: 'a'});
 app.use(morgan('combined', {stream: logStream}));
 app.use(morgan('dev'));
 
-app.use(function (req, res, next) {
-  var client = require('./lib/loggly')('incoming');
+// app.use(function (req, res, next) {
+//   var client = require('./lib/loggly')('incoming');
 
-  client.log({
-    ip: req.ip,
-    date: new Date(),
-    url: req.url,
-    status: res.statusCode,
-    method: req.method
-  });
-  next();
-});
+//   client.log({
+//     ip: req.ip,
+//     date: new Date(),
+//     url: req.url,
+//     status: res.statusCode,
+//     method: req.method
+//   });
+//   next();
+// });
 
 app.use(function getAuthStatus(req, res, next) {
   res.locals.user = req.session.user || null;
@@ -77,16 +74,16 @@ app.use(function (req, res) {
 });
 
 app.use(function (err, req, res, next) {
-  var client = require('./lib/loggly')('error');
+  // var client = require('./lib/loggly')('error');
 
-  client.log({
-    ip: req.ip,
-    date: new Date(),
-    url: req.url,
-    status: res.statusCode,
-    method: req.method,
-    stackTrace: err.stack
-  });
+  // client.log({
+  //   ip: req.ip,
+  //   date: new Date(),
+  //   url: req.url,
+  //   status: res.statusCode,
+  //   method: req.method,
+  //   stackTrace: err.stack
+  // });
 
   // pass 4 arguments to create an error handling middleware
   console.log('ERRRRRRRRRR', err.stack);
